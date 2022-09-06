@@ -49,19 +49,19 @@ jobs:
           ${{ github.workspace }}\strawberry-perl-5.32.1.1-64bit-portable\perl\bin;^
           ${{ github.workspace }}\strawberry-perl-5.32.1.1-64bit-portable\c\bin;
           cd hdf5 &&^
-          cmake.exe -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.libraryName }}" -B./build &&^
+          cmake.exe -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build &&^
           cd build && cmake --build . && cmake --install .
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          directory: "hdf5/build/${{ env.libraryName }}"
+          directory: "hdf5/build/${{ env.cmakeInstallationPath }}"
           filename: "${{ env.mingwTargetZip }}"
           
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "hdf5/build/${{ env.libraryName }}/${{ env.mingwTargetZip }}"
+          artifacts: "hdf5/build/${{ env.cmakeInstallationPath }}/${{ env.mingwTargetZip }}"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
