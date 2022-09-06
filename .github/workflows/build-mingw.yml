@@ -45,7 +45,9 @@ jobs:
           ${{ github.workspace }}\mingw64;^
           ${{ github.workspace }}\mingw64\bin;^
           ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;^
-          ${{ github.workspace }}\strawberry-perl-5.32.1.1-64bit-portable;
+          ${{ github.workspace }}\strawberry-perl-5.32.1.1-64bit-portable\perl\site\bin;^
+          ${{ github.workspace }}\strawberry-perl-5.32.1.1-64bit-portable\perl\bin;^
+          ${{ github.workspace }}\strawberry-perl-5.32.1.1-64bit-portable\c\bin;
           cd hdf5 &&^
           cmake.exe -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.libraryName }}" -B./build &&^
           cd build && cmake --build . && cmake --install .
